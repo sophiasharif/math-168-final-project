@@ -11,33 +11,25 @@ This repository contains reproducible experiments for anti-money laundering (AML
 
 We model financial transactions as a directed multigraph.
 
-- **Graph:** \(G=(V,E)\), where \(V\) is the set of accounts and \(E\) is the multiset of directed transaction edges.
-- **Edge:** \(e_k=(u_k,v_k,t_k,\mathbf{z}_k,y_k)\) for transaction \(k\):
-  - \(u_k \in V\): source account
-  - \(v_k \in V\): destination account
-  - \(t_k \in \mathbb{R}\): timestamp
-  - \(\mathbf{z}_k\): raw edge feature vector (amount, currency, payment format, etc.)
-  - \(y_k \in \{0,1\}\): laundering label (1 = illicit, 0 = licit)
+- **Graph:** G = (V, E), where V is the set of accounts and E is the multiset of directed transaction edges.
+- **Edge:** e_k = (u_k, v_k, t_k, z_k, y_k) for transaction k:
+  - u_k in V: source account
+  - v_k in V: destination account
+  - t_k in R: timestamp
+  - z_k: raw edge feature vector (amount, currency, payment format, etc.)
+  - y_k in {0,1}: laundering label (1 = illicit, 0 = licit)
 - **Edge index order:** transactions are sorted by timestamp for temporal training and feature extraction.
-- **Splits:** \(E_{\text{train}},E_{\text{val}},E_{\text{test}}\) with a 60/20/20 temporal split.
-- **Node features:** \(\mathbf{x}_i\) for node \(i\), usually simple structural placeholders or engineered statistics.
-- **Edge embedding:** \(\mathbf{h}^{(0)}_{e_k}\) is the encoded edge feature before message passing.
-- **Node embedding:** \(\mathbf{h}^{(\ell)}_i\) is node embedding at layer \(\ell\).
-- **Prediction target:** edge-level probability \(\hat{p}_k = P(y_k=1 \mid G, e_k)\).
-- **Decision threshold:** \(\tau\), with predicted class \(\hat{y}_k=\mathbb{1}[\hat{p}_k \ge \tau]\).
-- **Primary metric:** minority-class F1 score
-  \[
-  \text{F1} = \frac{2PR}{P+R},
-  \]
-  where \(P\) is precision and \(R\) is recall on class \(y=1\).
+- **Splits:** E_train, E_val, E_test with a 60/20/20 temporal split.
+- **Node features:** x_i for node i, usually simple structural placeholders or engineered statistics.
+- **Edge embedding:** h_e_k^(0) is the encoded edge feature before message passing.
+- **Node embedding:** h_i^(l) is node embedding at layer l.
+- **Prediction target:** edge-level probability p_hat_k = P(y_k = 1 | G, e_k).
+- **Decision threshold:** tau, with predicted class y_hat_k = 1[p_hat_k >= tau].
+- **Primary metric:** minority-class F1 score, F1 = 2PR / (P + R), where P is precision and R is recall on class y = 1.
 
 ### Motif Features (when enabled)
 
-For motif-enhanced experiments, each edge may include motif support features
-\[
-\mathbf{m}_k=[m_{k,1},\dots,m_{k,d_m}]
-\]
-computed in a streaming, past-only manner from prior graph history (no future leakage).
+For motif-enhanced experiments, each edge may include motif support features m_k = [m_k,1, ..., m_k,d_m], computed in a streaming, past-only manner from prior graph history (no future leakage).
 
 ## Repository Organization
 
