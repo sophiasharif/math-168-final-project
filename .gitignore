@@ -1,0 +1,6 @@
+data/LI-Small_Trans.csv
+data/HI-Small_Patterns.txt
+data/HI-Small_Trans.csv
+.DS_Store
+.git.backup-*/
+MEGA-GNN/.git.backup-*/

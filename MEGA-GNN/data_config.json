@@ -1,0 +1,7 @@
+{
+    "paths": {
+      "aml_data": "/content/drive/MyDrive/math-168/data",
+      "model_to_load": "/content/drive/MyDrive/math-168/MEGA-GNN/checkpoints",
+      "model_to_save": "/content/drive/MyDrive/math-168/MEGA-GNN/checkpoints"
+    }
+  }
